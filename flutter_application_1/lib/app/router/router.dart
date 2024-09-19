@@ -14,26 +14,26 @@ final GoRouter router = GoRouter(
  initialLocation: '/home',
  navigatorKey: _rootNavigationKey,
  routes: <RouteBase>[
- GoRoute(
- path: '/home',
- pageBuilder: (context, state) {
- return NoTransitionPage<void>(
- key: state.pageKey,
- child: const HomeScreen(),
- );
- },
- // для следующей лабораторной работы
- // routes: [
- // GoRoute(
- // path: 'article/:id',
- // pageBuilder: (context, state) {
- // return NoTransitionPage<void>(
- // key: state.pageKey,
- // child: const ArticleScreen(),
- // );
- // },
- // ),
- // ],
- ),
+  GoRoute(
+    path: '/home',
+    pageBuilder: (context, state) {
+      return NoTransitionPage<void>(
+        key: state.pageKey,
+        child: const HomeScreen(),
+        );
+      },
+    routes: [
+      GoRoute(
+        path: 'article/:id',
+        pageBuilder: (context, state) {
+          final articleId = state.pathParameters['id']!;
+          return NoTransitionPage<void>(
+            key: state.pageKey,
+            child: ArticleScreen(articleId: articleId),
+            );
+          },
+        ),
+      ],
+    ),
  ],
 );
