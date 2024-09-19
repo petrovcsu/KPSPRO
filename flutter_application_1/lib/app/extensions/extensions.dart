@@ -1,0 +1,1 @@
+export 'widget_extensions.dart'; //!!! в примере неит этого экспорта
