@@ -1,1 +1,1 @@
-export 'home/home_screen.dart'; //в примере не тот путь
+export 'home/home.dart'; //в примере не тот путь

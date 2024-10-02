@@ -5,7 +5,7 @@ class NewsBriefApp extends StatelessWidget {
  @override
  Widget build(BuildContext context) {
  return MaterialApp.router(
- title: 'News Brief',
+ title: 'Dogs',
  theme: AppTheme.lightTheme,
  routeInformationProvider: router.routeInformationProvider,
  routeInformationParser: router.routeInformationParser,

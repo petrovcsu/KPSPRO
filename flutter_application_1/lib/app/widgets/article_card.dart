@@ -1,56 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_application_1/app/app.dart'; //!!!
+//import 'package:flutter_application_1/app/app.dart'; //!!!
+import 'package:flutter_application_1/domain/repository/model/article.dart';
 
 class ArticleCard extends StatelessWidget {
-  final String articleId = 'Tiger';
-
+    
   const ArticleCard({
     super.key,
+    required this.article, // Добавляем параметр
   });
+
+  final Article article; // Добавляем это поле
 
   @override
   Widget build(BuildContext context) {
+    final breed = article.breeds.isNotEmpty ? article.breeds[0] : null;
+
     return InkWell(
       onTap: () {
-        context.go('/home/article/$articleId');
+        context.go(
+          '/home/article/${article.id}',
+          extra: article,  
+        );
       },
+      
       borderRadius: BorderRadius.circular(5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                width: 100,
-                height: 100,
-                'assets/images/yt.jpg',
-                fit: BoxFit.cover,
-                ),
+            child: Image.network(
+              article.url,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
             ),
-            20.pw,
-            Expanded(
-              child: Column(
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  articleId,
-                  maxLines: 1,
+                  breed?.name ?? 'No breed name',
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                    5.ph,
-                    Text(
-                    'Description of Article $articleId',
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  breed?.temperament ?? 'No temperaments available', 
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-    }
+          ),
+        ],
+      ),
+    );
+  }
 }
